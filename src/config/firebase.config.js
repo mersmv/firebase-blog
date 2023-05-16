@@ -2,6 +2,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { createContext } from 'react';
+import { collection, getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,3 +27,13 @@ export const auth = getAuth(app);
 
 //tambine creamos un contexto pa poder usarlo en todos lados
 export const AuthContext = createContext();
+
+//aqui en db guardamos nuestra base de datos, y su referencia a una collecion, si hubiera masse crean mas
+
+const db = getFirestore(app);
+
+export const blogCollectionreference = collection(db, 'blog-test');
+
+//hay que crear un storage para meter las fotos
+
+export const storage = getStorage(app);

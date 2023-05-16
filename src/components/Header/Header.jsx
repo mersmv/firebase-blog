@@ -1,14 +1,18 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../config/firebase.config';
+import { AuthContext, auth } from '../../config/firebase.config';
 import {
 	StyledContaner,
 	StyledHeader,
 	StyledIcon,
+	StyledLogOut,
 	StyledTitle
 } from './styles';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 	const { currentUser } = useContext(AuthContext);
+	const navigate = useNavigate();
 	return (
 		<>
 			{currentUser && (
@@ -18,28 +22,38 @@ const Header = () => {
 						<StyledTitle to=''>Home</StyledTitle>
 					</StyledContaner>
 					<li>
-						<StyledTitle to=''>New Post</StyledTitle>
+						<StyledTitle to='newpost'>New Post</StyledTitle>
 					</li>
 					<li>
 						<StyledTitle to=''>Profile</StyledTitle>
 					</li>
+					<li>
+						<StyledLogOut onClick={() => handleSignOut(navigate)}>
+							Log Out
+						</StyledLogOut>
+					</li>
 				</StyledHeader>
 			)}
-
-			<StyledHeader>
-				<StyledContaner>
-					<StyledIcon src='public/house-solid.svg' alt='' />
-					<StyledTitle to=''>Home</StyledTitle>
-				</StyledContaner>
-				<li>
-					<StyledTitle to=''>Login</StyledTitle>
-				</li>
-				<li>
-					<StyledTitle to='register'>Register</StyledTitle>
-				</li>
-			</StyledHeader>
+			{!currentUser && (
+				<StyledHeader>
+					<StyledContaner>
+						<StyledIcon src='public/house-solid.svg' alt='' />
+						<StyledTitle to=''>Home</StyledTitle>
+					</StyledContaner>
+					<li>
+						<StyledTitle to='login'>Login</StyledTitle>
+					</li>
+					<li>
+						<StyledTitle to='register'>Register</StyledTitle>
+					</li>
+				</StyledHeader>
+			)}
 		</>
 	);
 };
 
+const handleSignOut = async navigate => {
+	await signOut(auth);
+	navigate('/');
+};
 export default Header;

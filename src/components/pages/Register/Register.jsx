@@ -16,7 +16,7 @@ const Register = () => {
 					Correo electronico:
 					<input
 						type='text'
-						onChange={() =>
+						onChange={e =>
 							setRegisteredUser({ ...registeredUser, email: e.target.value })
 						}
 					/>
@@ -25,7 +25,7 @@ const Register = () => {
 					Contraseña:
 					<input
 						type='text'
-						onChange={() =>
+						onChange={e =>
 							setRegisteredUser({ ...registeredUser, password: e.target.value })
 						}
 					/>
@@ -34,7 +34,7 @@ const Register = () => {
 					Confirmar contraseña:
 					<input
 						type='text'
-						onChange={() =>
+						onChange={e =>
 							setRegisteredUser({
 								...registeredUser,
 								passwordCheck: e.target.value

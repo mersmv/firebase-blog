@@ -29,4 +29,13 @@ const StyledTitle = styled(NavLink)`
 	cursor: pointer;
 `;
 
-export { StyledHeader, StyledIcon, StyledContaner, StyledTitle };
+const StyledLogOut = styled.button`
+	padding: 30px;
+	font-size: 1.3rem;
+	cursor: pointer;
+	border: 2px solid lightgoldenrodyellow;
+	background-color: lightgoldenrodyellow;
+	border-radius: 15px;
+`;
+
+export { StyledHeader, StyledIcon, StyledContaner, StyledTitle, StyledLogOut };
